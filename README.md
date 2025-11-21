@@ -1,7 +1,7 @@
 # 🚀 ProjectHub - Kanban Project Management System
 
 <p align="center">
-  <img src="screenshots/login.png" alt="ProjectHub Logo" width="600">
+  <img src="screenshots/aaaalogin.png" alt="ProjectHub Logo" width="600">
 </p>
 
 <p align="center">
@@ -69,7 +69,7 @@ This project demonstrates my proficiency in full-stack .NET development, databas
 
 #### Login
 *Secure login interface with modern design*
-![Login](screenshots/login.png)
+![Login](screenshots/aaaalogin.png)
 
 #### Register
 *User-friendly registration form*
@@ -79,7 +79,7 @@ This project demonstrates my proficiency in full-stack .NET development, databas
 
 #### Create or Join Project
 *Easily create new projects or join existing ones with a code*
-![Create or Join](screenshots/createorjoin.png)
+![Create or Join](screenshots/aaacreateorjoin.png)
 
 #### Switch Projects
 *Seamlessly switch between multiple projects*
