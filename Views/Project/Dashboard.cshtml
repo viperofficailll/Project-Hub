@@ -1,0 +1,1614 @@
+@model Project
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Items - Project Management</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #0dcaf0;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f6fa;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 100%;
+            margin-top: 0;
+        }
+
+        .page-header {
+            margin-bottom: 1rem;
+        }
+
+        /* Simple Navigation Tabs */
+        .simple-nav {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-tabs-left {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .view-toggle-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+            .nav-tab:hover {
+                background: #f8f9fa;
+                color: #495057;
+            }
+
+            .nav-tab.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+        .view-btn {
+            background: transparent;
+            border: 2px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .view-btn:hover {
+                background: #f8f9fa;
+                border-color: #adb5bd;
+                color: #495057;
+            }
+
+            .view-btn.active {
+                background: var(--primary-color);
+                border-color: var(--primary-color);
+                color: white;
+            }
+
+        /* List View Styles */
+        .list-view-container {
+            background: transparent;
+            padding: 0;
+        }
+
+        .list-view-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .list-task-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
+        }
+
+            .list-task-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+                border-color: var(--primary-color);
+            }
+
+        .list-task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .list-task-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .list-task-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .list-task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Overview Page Styles */
+        .overview-container {
+            background: transparent;
+            padding: 0;
+        }
+
+        .overview-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin: 0;
+        }
+
+        .stat-info p {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            margin: 0.25rem 0 0 0;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+            .chart-card h4 {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: var(--dark-bg);
+                margin-bottom: 1.5rem;
+            }
+
+        /* Progress Section */
+        .progress-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+            .progress-section h4 {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: var(--dark-bg);
+                margin-bottom: 1rem;
+            }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+            .progress-bar-fill span {
+                color: white;
+                font-weight: 600;
+                font-size: 1rem;
+            }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Kanban Board Styles */
+        .kanban-board {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .kanban-column {
+            flex: 1;
+            min-width: 380px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 250px);
+        }
+
+        .column-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .column-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+        }
+
+            .column-title i {
+                font-size: 1.2rem;
+            }
+
+        .task-count {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .add-task-btn {
+            background: transparent;
+            border: 2px dashed #ccc;
+            color: #666;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+        }
+
+            .add-task-btn:hover {
+                border-color: var(--primary-color);
+                color: var(--primary-color);
+                background: rgba(13, 110, 253, 0.05);
+            }
+
+        .column-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 200px;
+        }
+
+            .column-content.drag-over {
+                background-color: rgba(13, 110, 253, 0.05);
+                border: 2px dashed var(--primary-color);
+                border-radius: 8px;
+            }
+
+        /* Enhanced Task Card Styles */
+        .task-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+            cursor: move;
+            border: 2px solid transparent;
+        }
+
+            .task-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+                border-color: var(--primary-color);
+            }
+
+            .task-card.dragging {
+                opacity: 0.5;
+            }
+
+        .task-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .task-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .task-card-description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 14px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .task-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .options-icon {
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+            font-size: 18px;
+        }
+
+            .options-icon:hover {
+                color: #333;
+            }
+
+        /* Avatar styles */
+        .assigned-container {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+            .assigned-container:hover {
+                transform: scale(1.05);
+            }
+
+        .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            border: 2px solid white;
+            margin-left: -8px;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .avatar:first-child {
+                margin-left: 0;
+            }
+
+            .avatar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+            }
+
+        .date-info-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-size: 13px;
+            color: #666;
+        }
+
+            .date-info-wrapper:hover {
+                color: #4f46e5;
+            }
+
+        /* Dropdown styles */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+            select:focus {
+                outline: none;
+                border-color: #666;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+            }
+
+            select:hover {
+                border-color: #999;
+            }
+
+        /* Color Classes (STATE) */
+        .todo {
+            background-color: #d8e8ff;
+            color: #0055cc;
+        }
+
+        .inprogress {
+            background-color: #ffe8c2;
+            color: #d47300;
+        }
+
+        .completed {
+            background-color: #d4f5d4;
+            color: #0f8a1c;
+        }
+
+        .cancelled {
+            background-color: #ffd6d6;
+            color: #cc1b1b;
+        }
+
+        /* Color Classes (PRIORITY) */
+        .urgent {
+            background-color: #ffd6d6;
+            color: #cc1b1b;
+        }
+
+        .high {
+            background-color: #ffe0b3;
+            color: #d47300;
+        }
+
+        .medium {
+            background-color: #fff2b3;
+            color: #d4a000;
+        }
+
+        .low {
+            background-color: #d4f5d4;
+            color: #0f8a1c;
+        }
+
+        .none {
+            background-color: #f0f0f0;
+            color: #777;
+        }
+
+        /* Modal Styles */
+        .modal-backdrop-custom {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background: white;
+            width: 480px;
+            max-width: 90vw;
+            padding: 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .modal-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .modal-body-custom {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .modal-footer-custom {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 24px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .user-option {
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.15s ease;
+        }
+
+            .user-option:hover {
+                background-color: #f3f4f6;
+            }
+
+            .user-option.selected {
+                background-color: #eef2ff;
+            }
+
+        /* Scrollbar Styling */
+        .column-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .column-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .column-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+            .column-content::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+        .kanban-board::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .kanban-board::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .kanban-board::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+            .kanban-board::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+        .btn-custom {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: none;
+        }
+
+        .btn-primary-custom {
+            background: #4f46e5;
+            color: white;
+        }
+
+            .btn-primary-custom:hover {
+                background: #4338ca;
+            }
+
+        .btn-secondary-custom {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+            .btn-secondary-custom:hover {
+                background: #d1d5db;
+            }
+
+        .btn-danger-custom {
+            background: transparent;
+            color: #dc2626;
+            border: none;
+        }
+
+            .btn-danger-custom:hover {
+                background: #fee2e2;
+            }
+    </style>
+</head>
+
+<body>
+    @Model.ProjectName
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2 class="page-title">Work Items</h2>
+            <p class="text-muted">Manage and track all your project tasks</p>
+        </div>
+
+        <!-- Simple Navigation Tabs -->
+        <div class="simple-nav">
+            <div class="nav-tabs-left">
+                <button class="nav-tab" id="overviewTab">Overview</button>
+                <button class="nav-tab active" id="workitemsTab">Work Items</button>
+                <a href="/Project/Addpeople" class="nav-tab" id="overviewTab">
+  Add people  <i class="bi bi-plus-lg"></i>
+</a>
+            </div>
+            <div class="view-toggle-buttons">
+                <button class="view-btn" id="listViewBtn" title="List View">
+                    <i class="bi bi-list-ul"></i>
+                </button>
+                <button class="view-btn active" id="kanbanViewBtn" title="Kanban View">
+                    <i class="bi bi-kanban"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Kanban Board View -->
+        <div class="kanban-board" id="boardView" style="display: flex;">
+            <!-- To Do Column -->
+            <div class="kanban-column" data-status="todo">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="bi bi-circle"></i>
+                        <span>To Do</span>
+                        <span class="task-count">0</span>
+                    </div>
+                    <button class="add-task-btn" onclick="openCreateTaskModal('todo')" title="Add new task">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+                <div class="column-content" id="todoColumn">
+                    <!-- Tasks will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- In Progress Column -->
+            <div class="kanban-column" data-status="inprogress">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        <span>In Progress</span>
+                        <span class="task-count">0</span>
+                    </div>
+                    <button class="add-task-btn" onclick="openCreateTaskModal('inprogress')" title="Add new task">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+                <div class="column-content" id="inprogressColumn">
+                    <!-- Tasks will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Completed Column -->
+            <div class="kanban-column" data-status="completed">
+                <div class="column-header">
+                    <div class="column-title">
+                        <i class="bi bi-check-circle"></i>
+                        <span>Completed</span>
+                        <span class="task-count">0</span>
+                    </div>
+                    <button class="add-task-btn" onclick="openCreateTaskModal('completed')" title="Add new task">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+                <div class="column-content" id="completedColumn">
+                    <!-- Tasks will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Page (Hidden by default) -->
+        <div class="overview-container" id="overviewPage" style="display: none;">
+            <div class="overview-content">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e3f2fd;">
+                            <i class="bi bi-list-task" style="color: #1976d2;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalTasks">0</h3>
+                            <p>Total Tasks</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fff3e0;">
+                            <i class="bi bi-clock-history" style="color: #f57c00;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="inProgressTasks">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e8f5e9;">
+                            <i class="bi bi-check-circle-fill" style="color: #388e3c;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="completedTasks">0</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #f3e5f5;">
+                            <i class="bi bi-graph-up-arrow" style="color: #7b1fa2;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="completionPercentage">0%</h3>
+                            <p>Completion Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <!-- Status Distribution Chart -->
+                    <div class="chart-card">
+                        <h4>Task Status Distribution</h4>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+
+                    <!-- Priority Distribution Chart -->
+                    <div class="chart-card">
+                        <h4>Priority Distribution</h4>
+                        <canvas id="priorityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-section">
+                    <h4>Overall Progress</h4>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;">
+                            <span id="progressBarText">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List View (Hidden by default) -->
+        <div class="list-view-container" id="listView" style="display: none;">
+            <div class="list-view-content" id="listViewContent">
+                <!-- Tasks will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="editTaskModal" class="modal-backdrop-custom">
+        <div class="modal-box">
+            <div class="modal-header-custom">
+                <h2 class="text-xl font-bold text-gray-800">Edit Task</h2>
+                <button class="btn-danger-custom" onclick="deleteTask()">
+                    <span>Delete</span> <i class="bi bi-trash text-xl"></i>
+                </button>
+            </div>
+
+            <div class="modal-body-custom space-y-4">
+                <div class="space-y-2">
+                    <label for="editTitle" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" id="editTitle"
+                           class="w-full p-3 border border-gray-300 rounded-lg text-lg font-semibold focus:ring-indigo-500 focus:border-indigo-500 transition-shadow">
+                </div>
+
+                <div class="space-y-2">
+                    <label for="editDescription" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="editDescription" rows="4"
+                              class="w-full p-3 border border-gray-300 rounded-lg resize-none text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow"></textarea>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-gray-100">
+                    <label class="block text-sm font-medium text-gray-700">Status & Priority</label>
+                    <div class="flex space-x-4">
+                        <select id="modalStateDropdown" class="flex-1"></select>
+                        <select id="modalPriorityDropdown" class="flex-1"></select>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-4 border-t border-gray-100">
+                    <label for="modalDueDateInput" class="block text-sm font-medium text-gray-700">Due Date</label>
+                    <input type="date" id="modalDueDateInput"
+                           class="w-full p-2 border border-gray-300 rounded-lg text-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="space-y-2 pt-4 border-t border-gray-100">
+                    <label class="block text-sm font-medium text-gray-700">Assigned To (Multi-Select)</label>
+                    <div id="modalAssigneeList" class="border border-gray-200 p-2 rounded-lg max-h-48 overflow-y-auto space-y-1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer-custom">
+                <button class="btn-custom btn-secondary-custom" onclick="closeEditModal()">Cancel</button>
+                <button class="btn-custom btn-primary-custom" onclick="saveTask()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <script>
+        // Data Management
+        const userPool = ["Alice Johnson", "Brian Lee", "Cynthia Adams", "David Parker", "Emily White"];
+        let tasks = [];
+        let taskIdCounter = 1;
+        let currentEditingTask = null;
+        let statusChart = null;
+        let priorityChart = null;
+
+        const stateOptions = [
+            { value: "todo", text: "To-do" },
+            { value: "inprogress", text: "In-progress" },
+            { value: "completed", text: "Completed" },
+            { value: "cancelled", text: "Cancelled" }
+        ];
+
+        const priorityOptions = [
+            { value: "urgent", text: "Urgent ⛔" },
+            { value: "high", text: "High ▲" },
+            { value: "medium", text: "Medium ●" },
+            { value: "low", text: "Low ●" },
+            { value: "none", text: "None ⚪" }
+        ];
+
+        const stateColors = {
+            todo: { bg: '#d8e8ff', color: '#0055cc' },
+            inprogress: { bg: '#ffe8c2', color: '#d47300' },
+            completed: { bg: '#d4f5d4', color: '#0f8a1c' },
+            cancelled: { bg: '#ffd6d6', color: '#cc1b1b' }
+        };
+
+        const priorityColors = {
+            urgent: { bg: '#ffd6d6', color: '#cc1b1b' },
+            high: { bg: '#ffe0b3', color: '#d47300' },
+            medium: { bg: '#fff2b3', color: '#d4a000' },
+            low: { bg: '#d4f5d4', color: '#0f8a1c' },
+            none: { bg: '#f0f0f0', color: '#777' }
+        };
+
+        // Initialize with sample tasks
+        function initializeTasks() {
+            tasks = [
+                {
+                    id: taskIdCounter++,
+                    title: "Implement user authentication",
+                    description: "Add login and registration functionality with JWT tokens",
+                    status: "inprogress",
+                    priority: "high",
+                    assignees: ["Brian Lee"],
+                    dueDate: "2024-12-20"
+                },
+                {
+                    id: taskIdCounter++,
+                    title: "Design landing page mockup",
+                    description: "Create high-fidelity designs for the new landing page",
+                    status: "todo",
+                    priority: "medium",
+                    assignees: ["Alice Johnson", "Cynthia Adams"],
+                    dueDate: "2024-12-22"
+                },
+                {
+                    id: taskIdCounter++,
+                    title: "Setup project repository",
+                    description: "Initialize Git repository and configure CI/CD pipeline",
+                    status: "completed",
+                    priority: "low",
+                    assignees: ["David Parker"],
+                    dueDate: "2024-12-15"
+                }
+            ];
+            renderAllTasks();
+        }
+
+        // Utility Functions
+        function getAssigneeHtml(assignees) {
+            if (!assignees || assignees.length === 0) {
+                return `<span style="font-size:12px; font-weight:500; color: #999;">Unassigned</span>`;
+            }
+
+            let html = '';
+            assignees.slice(0, 3).forEach((name) => {
+                const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                const color = `hsl(${hash % 360}, 60%, 50%)`;
+                html += `<div class="avatar" title="${name}" style="background-color: ${color};">${name.charAt(0)}</div>`;
+            });
+
+            if (assignees.length > 3) {
+                const extraCount = assignees.length - 3;
+                const extraTitle = assignees.slice(3).join(', ');
+                html += `<div class="avatar" style="background-color: #777;" title="${extraTitle}">+${extraCount}</div>`;
+            }
+
+            return html;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return "No due date";
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        }
+
+        function populateDropdown(dropdown, options, currentValue) {
+            dropdown.innerHTML = options.map(opt =>
+                `<option value="${opt.value}" ${opt.value === currentValue ? 'selected' : ''}>${opt.text}</option>`
+            ).join('');
+        }
+
+        function syncDropdownColor(dropdown, colors) {
+            const value = dropdown.value;
+            Object.keys(colors).forEach(key => dropdown.classList.remove(key));
+            dropdown.classList.add(value);
+            dropdown.style.backgroundColor = colors[value].bg;
+            dropdown.style.color = colors[value].color;
+        }
+
+        // Create Task Card
+        function createTaskCard(task) {
+            const card = document.createElement('div');
+            card.className = 'task-card';
+            card.draggable = true;
+            card.setAttribute('data-task-id', task.id);
+
+            card.innerHTML = `
+                <div class="task-card-header">
+                    <div class="task-card-title">${task.title || 'Untitled Task'}</div>
+                    <span class="options-icon" onclick="openEditModal(${task.id})">
+                        <i class="bi bi-three-dots"></i>
+                    </span>
+                </div>
+                <div class="task-card-description">${task.description || 'No description'}</div>
+                <div class="task-card-meta">
+                    <select class="task-status ${task.status}" onchange="updateTaskStatus(${task.id}, this.value)">
+                        ${stateOptions.map(opt =>
+                            `<option value="${opt.value}" ${opt.value === task.status ? 'selected' : ''}>${opt.text}</option>`
+                        ).join('')}
+                    </select>
+                    <select class="task-priority ${task.priority}" onchange="updateTaskPriority(${task.id}, this.value)">
+                        ${priorityOptions.map(opt =>
+                            `<option value="${opt.value}" ${opt.value === task.priority ? 'selected' : ''}>${opt.text}</option>`
+                        ).join('')}
+                    </select>
+                    <div class="date-info-wrapper" onclick="openEditModal(${task.id})">
+                        <i class="bi bi-calendar2-day"></i>
+                        <span>${formatDate(task.dueDate)}</span>
+                    </div>
+                    <div class="assigned-container" onclick="openEditModal(${task.id})">
+                        ${getAssigneeHtml(task.assignees)}
+                    </div>
+                </div>
+            `;
+
+            // Drag events
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragend', handleDragEnd);
+
+            // Apply colors to dropdowns
+            const statusDropdown = card.querySelector('.task-status');
+            const priorityDropdown = card.querySelector('.task-priority');
+            syncDropdownColor(statusDropdown, stateColors);
+            syncDropdownColor(priorityDropdown, priorityColors);
+
+            return card;
+        }
+
+        // Update Overview Statistics
+        function updateOverviewStats() {
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(t => t.status === 'completed').length;
+            const inProgressTasks = tasks.filter(t => t.status === 'inprogress').length;
+            const todoTasks = tasks.filter(t => t.status === 'todo').length;
+            const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+            // Update stat cards
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('inProgressTasks').textContent = inProgressTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('completionPercentage').textContent = completionPercentage + '%';
+
+            // Update progress bar
+            const progressBarFill = document.getElementById('progressBarFill');
+            const progressBarText = document.getElementById('progressBarText');
+            progressBarFill.style.width = completionPercentage + '%';
+            progressBarText.textContent = completionPercentage + '%';
+
+            // Update charts
+            updateCharts(todoTasks, inProgressTasks, completedTasks);
+        }
+
+        // Update Charts
+        function updateCharts(todoCount, inProgressCount, completedCount) {
+            // Count priorities
+            const urgentCount = tasks.filter(t => t.priority === 'urgent').length;
+            const highCount = tasks.filter(t => t.priority === 'high').length;
+            const mediumCount = tasks.filter(t => t.priority === 'medium').length;
+            const lowCount = tasks.filter(t => t.priority === 'low').length;
+            const noneCount = tasks.filter(t => t.priority === 'none').length;
+
+            // Status Chart
+            if (statusChart) {
+                statusChart.destroy();
+            }
+
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            statusChart = new Chart(statusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['To Do', 'In Progress', 'Completed'],
+                    datasets: [{
+                        data: [todoCount, inProgressCount, completedCount],
+                        backgroundColor: ['#d8e8ff', '#ffe8c2', '#d4f5d4'],
+                        borderColor: ['#0055cc', '#d47300', '#0f8a1c'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Priority Chart
+            if (priorityChart) {
+                priorityChart.destroy();
+            }
+
+            const priorityCtx = document.getElementById('priorityChart').getContext('2d');
+            priorityChart = new Chart(priorityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Urgent', 'High', 'Medium', 'Low', 'None'],
+                    datasets: [{
+                        label: 'Tasks',
+                        data: [urgentCount, highCount, mediumCount, lowCount, noneCount],
+                        backgroundColor: ['#ffd6d6', '#ffe0b3', '#fff2b3', '#d4f5d4', '#f0f0f0'],
+                        borderColor: ['#cc1b1b', '#d47300', '#d4a000', '#0f8a1c', '#777'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render All Tasks
+        function renderAllTasks() {
+            renderKanbanView();
+            renderListView();
+            updateTaskCounts();
+        }
+
+        // Render Kanban View
+        function renderKanbanView() {
+            const todoColumn = document.getElementById('todoColumn');
+            const inprogressColumn = document.getElementById('inprogressColumn');
+            const completedColumn = document.getElementById('completedColumn');
+
+            todoColumn.innerHTML = '';
+            inprogressColumn.innerHTML = '';
+            completedColumn.innerHTML = '';
+
+            tasks.forEach(task => {
+                const card = createTaskCard(task);
+                if (task.status === 'todo') {
+                    todoColumn.appendChild(card);
+                } else if (task.status === 'inprogress') {
+                    inprogressColumn.appendChild(card);
+                } else if (task.status === 'completed') {
+                    completedColumn.appendChild(card);
+                }
+            });
+        }
+
+        // Render List View
+        function renderListView() {
+            const listViewContent = document.getElementById('listViewContent');
+            listViewContent.innerHTML = '';
+
+            tasks.forEach(task => {
+                const listCard = createListTaskCard(task);
+                listViewContent.appendChild(listCard);
+            });
+        }
+
+        // Create List Task Card
+        function createListTaskCard(task) {
+            const card = document.createElement('div');
+            card.className = 'list-task-card';
+            card.setAttribute('data-task-id', task.id);
+
+            card.innerHTML = `
+                <div class="list-task-header">
+                    <div class="list-task-title">${task.title || 'Untitled Task'}</div>
+                    <span class="options-icon" onclick="openEditModal(${task.id})">
+                        <i class="bi bi-three-dots"></i>
+                    </span>
+                </div>
+                <div class="list-task-description">${task.description || 'No description'}</div>
+                <div class="list-task-meta">
+                    <select class="task-status ${task.status}" onchange="updateTaskStatus(${task.id}, this.value)">
+                        ${stateOptions.map(opt =>
+                            `<option value="${opt.value}" ${opt.value === task.status ? 'selected' : ''}>${opt.text}</option>`
+                        ).join('')}
+                    </select>
+                    <select class="task-priority ${task.priority}" onchange="updateTaskPriority(${task.id}, this.value)">
+                        ${priorityOptions.map(opt =>
+                            `<option value="${opt.value}" ${opt.value === task.priority ? 'selected' : ''}>${opt.text}</option>`
+                        ).join('')}
+                    </select>
+                    <div class="date-info-wrapper" onclick="openEditModal(${task.id})">
+                        <i class="bi bi-calendar2-day"></i>
+                        <span>${formatDate(task.dueDate)}</span>
+                    </div>
+                    <div class="assigned-container" onclick="openEditModal(${task.id})">
+                        ${getAssigneeHtml(task.assignees)}
+                    </div>
+                </div>
+            `;
+
+            // Apply colors to dropdowns
+            const statusDropdown = card.querySelector('.task-status');
+            const priorityDropdown = card.querySelector('.task-priority');
+            syncDropdownColor(statusDropdown, stateColors);
+            syncDropdownColor(priorityDropdown, priorityColors);
+
+            return card;
+        }
+
+        // Update Task Counts
+        function updateTaskCounts() {
+            document.querySelectorAll('.kanban-column').forEach(column => {
+                const count = column.querySelector('.column-content').children.length;
+                column.querySelector('.task-count').textContent = count;
+            });
+        }
+
+        // Create New Task
+        function openCreateTaskModal(status) {
+            const newTask = {
+                id: taskIdCounter++,
+                title: "",
+                description: "",
+                status: status,
+                priority: "medium",
+                assignees: [],
+                dueDate: ""
+            };
+            tasks.push(newTask);
+            currentEditingTask = newTask;
+            renderAllTasks();
+            openEditModal(newTask.id);
+        }
+
+        // Update Task Status
+        function updateTaskStatus(taskId, newStatus) {
+            const task = tasks.find(t => t.id === taskId);
+            if (task) {
+                task.status = newStatus;
+                renderAllTasks();
+                updateOverviewStats();
+            }
+        }
+
+        // Update Task Priority
+        function updateTaskPriority(taskId, newPriority) {
+            const task = tasks.find(t => t.id === taskId);
+            if (task) {
+                task.priority = newPriority;
+                renderAllTasks();
+                updateOverviewStats();
+            }
+        }
+
+        // Open Edit Modal
+        function openEditModal(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            currentEditingTask = task;
+            const modal = document.getElementById('editTaskModal');
+
+            document.getElementById('editTitle').value = task.title;
+            document.getElementById('editDescription').value = task.description;
+            document.getElementById('modalDueDateInput').value = task.dueDate;
+
+            const modalStateDropdown = document.getElementById('modalStateDropdown');
+            const modalPriorityDropdown = document.getElementById('modalPriorityDropdown');
+
+            populateDropdown(modalStateDropdown, stateOptions, task.status);
+            syncDropdownColor(modalStateDropdown, stateColors);
+
+            populateDropdown(modalPriorityDropdown, priorityOptions, task.priority);
+            syncDropdownColor(modalPriorityDropdown, priorityColors);
+
+            modalStateDropdown.onchange = () => syncDropdownColor(modalStateDropdown, stateColors);
+            modalPriorityDropdown.onchange = () => syncDropdownColor(modalPriorityDropdown, priorityColors);
+
+            renderModalAssigneeList(task.assignees || []);
+
+            modal.style.display = "flex";
+        }
+
+        // Render Assignee List in Modal
+        function renderModalAssigneeList(currentAssignees) {
+            const modalAssigneeList = document.getElementById('modalAssigneeList');
+            modalAssigneeList.innerHTML = '';
+
+            userPool.forEach(user => {
+                const isSelected = currentAssignees.includes(user);
+
+                const optionDiv = document.createElement('div');
+                optionDiv.className = `user-option ${isSelected ? 'selected' : ''}`;
+                optionDiv.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" ${isSelected ? 'checked' : ''} class="h-4 w-4 text-indigo-600 border-gray-300 rounded pointer-events-none">
+                        <span>${user}</span>
+                    </div>
+                    ${isSelected ? '<i class="bi bi-check-lg text-indigo-600"></i>' : ''}
+                `;
+
+                optionDiv.addEventListener('click', () => {
+                    const checkbox = optionDiv.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    optionDiv.classList.toggle('selected');
+
+                    let checkIcon = optionDiv.querySelector('.bi-check-lg');
+                    if (checkbox.checked) {
+                        if (!checkIcon) {
+                            optionDiv.insertAdjacentHTML('beforeend', '<i class="bi bi-check-lg text-indigo-600"></i>');
+                        }
+                    } else {
+                        if (checkIcon) {
+                            checkIcon.remove();
+                        }
+                    }
+                });
+
+                modalAssigneeList.appendChild(optionDiv);
+            });
+        }
+
+        // Save Task
+        function saveTask() {
+            if (!currentEditingTask) return;
+
+            currentEditingTask.title = document.getElementById('editTitle').value || 'Untitled Task';
+            currentEditingTask.description = document.getElementById('editDescription').value;
+            currentEditingTask.status = document.getElementById('modalStateDropdown').value;
+            currentEditingTask.priority = document.getElementById('modalPriorityDropdown').value;
+            currentEditingTask.dueDate = document.getElementById('modalDueDateInput').value;
+
+            // Get selected assignees
+            const selectedAssignees = [];
+            document.querySelectorAll('#modalAssigneeList .user-option.selected').forEach(option => {
+                const userName = option.querySelector('span').textContent;
+                selectedAssignees.push(userName);
+            });
+            currentEditingTask.assignees = selectedAssignees;
+
+            closeEditModal();
+            renderAllTasks();
+        }
+
+        // Delete Task
+        function deleteTask() {
+            if (!currentEditingTask) return;
+
+            if (confirm('Are you sure you want to delete this task?')) {
+                tasks = tasks.filter(t => t.id !== currentEditingTask.id);
+                closeEditModal();
+                renderAllTasks();
+                updateOverviewStats();
+            }
+        }
+
+        // Close Edit Modal
+        function closeEditModal() {
+            document.getElementById('editTaskModal').style.display = "none";
+            currentEditingTask = null;
+        }
+
+        // Drag and Drop Handlers
+        let draggedElement = null;
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (e.target.classList.contains('column-content')) {
+                e.target.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            if (e.target.classList.contains('column-content')) {
+                e.target.classList.remove('drag-over');
+            }
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            const dropTarget = e.target.classList.contains('column-content') ? e.target : e.target.closest('.column-content');
+            if (!dropTarget) return false;
+
+            dropTarget.classList.remove('drag-over');
+
+            if (draggedElement) {
+                const newStatus = dropTarget.closest('.kanban-column').getAttribute('data-status');
+                const taskId = parseInt(draggedElement.getAttribute('data-task-id'));
+
+                const task = tasks.find(t => t.id === taskId);
+                if (task) {
+                    task.status = newStatus;
+                    renderAllTasks();
+                }
+            }
+
+            return false;
+        }
+
+        // Setup Drop Zones
+        function setupDropZones() {
+            const columns = document.querySelectorAll('.column-content');
+            columns.forEach(column => {
+                column.addEventListener('dragover', handleDragOver);
+                column.addEventListener('dragenter', handleDragEnter);
+                column.addEventListener('dragleave', handleDragLeave);
+                column.addEventListener('drop', handleDrop);
+            });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('editTaskModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeEditModal();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTasks();
+            setupDropZones();
+            setupNavigation();
+            updateOverviewStats();
+        });
+
+        // Setup Navigation
+        function setupNavigation() {
+            const overviewTab = document.getElementById('overviewTab');
+            const workitemsTab = document.getElementById('workitemsTab');
+            const listViewBtn = document.getElementById('listViewBtn');
+            const kanbanViewBtn = document.getElementById('kanbanViewBtn');
+            const listView = document.getElementById('listView');
+            const boardView = document.getElementById('boardView');
+            const overviewPage = document.getElementById('overviewPage');
+
+            // Tab navigation
+            overviewTab.addEventListener('click', () => {
+                overviewTab.classList.add('active');
+                workitemsTab.classList.remove('active');
+
+                // Show overview page, hide work items views
+                overviewPage.style.display = 'block';
+                listView.style.display = 'none';
+                boardView.style.display = 'none';
+
+                // Update overview stats when switching to overview
+                updateOverviewStats();
+
+                // Hide view toggle buttons when on overview
+                listViewBtn.style.display = 'none';
+                kanbanViewBtn.style.display = 'none';
+            });
+
+            workitemsTab.addEventListener('click', () => {
+                workitemsTab.classList.add('active');
+                overviewTab.classList.remove('active');
+
+                // Hide overview page
+                overviewPage.style.display = 'none';
+
+                // Show view toggle buttons
+                listViewBtn.style.display = 'flex';
+                kanbanViewBtn.style.display = 'flex';
+
+                // Show the currently active view (kanban by default)
+                if (kanbanViewBtn.classList.contains('active')) {
+                    boardView.style.display = 'flex';
+                    listView.style.display = 'none';
+                } else {
+                    listView.style.display = 'block';
+                    boardView.style.display = 'none';
+                }
+            });
+
+            // View toggle buttons
+            listViewBtn.addEventListener('click', () => {
+                listViewBtn.classList.add('active');
+                kanbanViewBtn.classList.remove('active');
+                listView.style.display = 'block';
+                boardView.style.display = 'none';
+            });
+
+            kanbanViewBtn.addEventListener('click', () => {
+                kanbanViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                listView.style.display = 'none';
+                boardView.style.display = 'flex';
+            });
+        }
+    </script>
+</body>
+
+</html>

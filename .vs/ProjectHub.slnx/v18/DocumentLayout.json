@@ -1,0 +1,181 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Dotnet\\ProjectHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\models\\projects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:models\\projects.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\viewmodels\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:viewmodels\\createorjoinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\views\\project\\createorjoin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:views\\project\\createorjoin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\views\\project\\join.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:views\\project\\join.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|e:\\dotnet\\projecthub\\views\\project\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{610CFED5-EC8A-6447-AE8F-7C5EEC6CFCF7}|ProjectHub.csproj|solutionrelative:views\\project\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Dotnet\\ProjectHub\\Migrations\\20251121112012_AddProjectIdToUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251121112012_AddProjectIdToUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateOrJoinViewModel.cs",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\ViewModels\\CreateOrJoinViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\CreateOrJoinViewModel.cs",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\ViewModels\\CreateOrJoinViewModel.cs",
+              "RelativeToolTip": "ViewModels\\CreateOrJoinViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T12:57:56.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Login.cshtml",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T12:50:29.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwD4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T12:49:46.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Projects.cs",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Models\\Projects.cs",
+              "RelativeDocumentMoniker": "Models\\Projects.cs",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Models\\Projects.cs",
+              "RelativeToolTip": "Models\\Projects.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:34:29.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Myprojects.cshtml",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Views\\Project\\Myprojects.cshtml",
+              "RelativeDocumentMoniker": "Views\\Project\\Myprojects.cshtml",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Views\\Project\\Myprojects.cshtml",
+              "RelativeToolTip": "Views\\Project\\Myprojects.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T11:34:14.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CreateorJoin.cshtml",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Views\\Project\\CreateorJoin.cshtml",
+              "RelativeDocumentMoniker": "Views\\Project\\CreateorJoin.cshtml",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Views\\Project\\CreateorJoin.cshtml",
+              "RelativeToolTip": "Views\\Project\\CreateorJoin.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAOcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T11:29:22.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Join.cshtml",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Views\\Project\\Join.cshtml",
+              "RelativeDocumentMoniker": "Views\\Project\\Join.cshtml",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Views\\Project\\Join.cshtml",
+              "RelativeToolTip": "Views\\Project\\Join.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T11:26:55.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20251121112012_AddProjectIdToUser.cs",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Migrations\\20251121112012_AddProjectIdToUser.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251121112012_AddProjectIdToUser.cs",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Migrations\\20251121112012_AddProjectIdToUser.cs",
+              "RelativeToolTip": "Migrations\\20251121112012_AddProjectIdToUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:20:13.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "E:\\Dotnet\\ProjectHub\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProjectController.cs",
+              "ToolTip": "E:\\Dotnet\\ProjectHub\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "Controllers\\ProjectController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T11:17:10.846Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Join Project";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>Join a Project</h4>
+                </div>
+                <div class="card-body p-4">
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <p class="text-muted text-center mb-4">
+                        Enter the 6-digit token shared by your project owner to join their project.
+                    </p>
+
+                    <form asp-controller="Project" asp-action="JoinProject" method="post" id="joinForm">
+                        <div class="mb-4">
+                            <label for="token" class="form-label fw-semibold">Project Token</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                                <input type="text"
+                                       class="form-control form-control-lg text-center tracking-wide"
+                                       id="token"
+                                       name="token"
+                                       placeholder="000000"
+                                       maxlength="6"
+                                       minlength="6"
+                                       pattern="[0-9]{6}"
+                                       title="Please enter a 6-digit numeric token"
+                                       required
+                                       autofocus />
+                            </div>
+                            <div class="form-text">The token should be 6 digits (e.g., 123456)</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg" id="joinBtn">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Join Project
+                            </button>
+                            <a asp-controller="Project" asp-action="CreateOrJoin" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tracking-wide {
+        letter-spacing: 0.5em;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+        .tracking-wide::placeholder {
+            letter-spacing: 0.3em;
+            color: #ccc;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        document.getElementById('token').addEventListener('input', function (e) {
+            // Only allow numeric input
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('joinForm').addEventListener('submit', function (e) {
+            var token = document.getElementById('token').value;
+            if (token.length !== 6 || !/^\d{6}$/.test(token)) {
+                e.preventDefault();
+                alert('Please enter a valid 6-digit token.');
+                return false;
+            }
+
+            // Disable button to prevent double submission
+            var btn = document.getElementById('joinBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Joining...';
+        });
+    </script>
+}

@@ -1,0 +1,275 @@
+/* Login Page CSS */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --light-bg: #f8f9fa;
+    --dark-bg: #212529;
+    --border-color: #dee2e6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Login Container */
+.login-container {
+    height: 100vh;
+    width: 100%;
+}
+
+.login-container .row {
+    height: 100%;
+}
+
+/* Left Side - Brand Section */
+.left-side {
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.9) 0%, rgba(11, 94, 215, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-overlay {
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.brand-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.brand-title i {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.brand-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+/* Right Side - Form Section */
+.login-form-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Login Title */
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-bg);
+    margin-bottom: 0.5rem;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 600;
+    color: var(--dark-bg);
+    margin-bottom: 0.5rem;
+}
+
+.input-group-text {
+    background-color: var(--light-bg);
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary-color);
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: var(--primary-color);
+}
+
+/* Remember Me Checkbox */
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Login Button */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+/* Divider */
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.divider span {
+    position: relative;
+    background-color: white;
+    padding: 0 1rem;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Social Login Buttons */
+.btn-outline-secondary {
+    border-color: var(--border-color);
+    color: var(--dark-bg);
+    font-weight: 500;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--light-bg);
+    border-color: var(--secondary-color);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+}
+
+/* Sign Up Link */
+.signup-text {
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+.signup-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Back to Home Link */
+.back-home {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.back-home:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .login-form-container {
+        padding: 1.5rem;
+    }
+
+    .login-form-wrapper {
+        max-width: 100%;
+    }
+
+    .login-title {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-form-container {
+        padding: 1rem;
+    }
+
+    .login-title {
+        font-size: 1.5rem;
+    }
+
+    .brand-title {
+        font-size: 2rem;
+    }
+
+    .brand-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-form-wrapper {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Smooth Scrolling for Mobile */
+.login-form-container {
+    -webkit-overflow-scrolling: touch;
+}

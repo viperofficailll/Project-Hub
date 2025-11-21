@@ -1,0 +1,274 @@
+﻿/* Verify Page CSS */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --light-bg: #f8f9fa;
+    --dark-bg: #212529;
+    --border-color: #dee2e6;
+    --success-color: #198754;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Verify Container */
+.verify-container {
+    width: 100%;
+    max-width: 500px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Verify Card */
+.verify-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Icon Container */
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.icon-circle {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0b5ed7 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
+    animation: pulse 2s infinite;
+}
+
+    .icon-circle i {
+        font-size: 3rem;
+        color: white;
+    }
+
+/* Title and Description */
+.verify-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-bg);
+    margin-bottom: 1rem;
+}
+
+.verify-description {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+    .verify-description strong {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+/* PIN Input Container */
+.pin-container {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+/* PIN Input Fields */
+.pin-input {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background-color: var(--light-bg);
+}
+
+    .pin-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+        transform: scale(1.05);
+    }
+
+    .pin-input:valid {
+        border-color: var(--success-color);
+        background-color: rgba(25, 135, 84, 0.05);
+    }
+
+/* Verify Button */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+    }
+
+/* Resend Code Section */
+.resend-text {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.resend-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0;
+    font-size: 1rem;
+}
+
+    .resend-link:hover {
+        text-decoration: underline;
+        color: #0b5ed7;
+    }
+
+.timer-text {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+    .timer-text span {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+/* Change Email Link */
+.change-email {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .change-email:hover {
+        color: var(--primary-color);
+    }
+
+/* Back to Login Link */
+.back-login {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .back-login:hover {
+        color: var(--primary-color);
+    }
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    body {
+        padding: 1rem;
+    }
+
+    .verify-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .verify-title {
+        font-size: 1.5rem;
+    }
+
+    .verify-description {
+        font-size: 0.9rem;
+    }
+
+    .pin-container {
+        gap: 0.5rem;
+    }
+
+    .pin-input {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+    }
+
+        .icon-circle i {
+            font-size: 2.5rem;
+        }
+}
+
+@media (max-width: 400px) {
+    .pin-input {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .pin-container {
+        gap: 0.4rem;
+    }
+}
+
+/* Focus visible for accessibility */
+.pin-input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}

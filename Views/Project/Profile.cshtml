@@ -1,0 +1,56 @@
+@model ProjectHub.Models.User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="~/css/profile.css" />
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-card">
+
+            <div class="profile-header">
+                <img src="~/images/default-profile.png" class="profile-img" alt="Profile Picture" />
+                <h2>@Model.UserEmail</h2>
+                @* <p>@Model.UserPassword</p> *@
+            </div>
+
+            <div class="profile-section">
+                <h3>Account Details</h3>
+
+                <div class="info-row">
+                    <span class="label">Full Name:</span>
+                    @* <span class="value">@Model.FullName</span> *@
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Email:</span>
+                    <span class="value">@Model.UserEmail</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Phone:</span>
+                    @* <span class="value">@Model.PhoneNumber</span> *@
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Joined:</span>
+                    <span class="value">@Model.CreatedAt.ToString("MMM dd, yyyy")</span>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <a class="btn-edit" asp-controller="Profile" asp-action="Edit">Edit Profile</a>
+                <a class="btn-logout" asp-controller="Home" asp-action="Logout">Logout</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

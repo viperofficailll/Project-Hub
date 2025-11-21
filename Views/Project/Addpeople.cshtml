@@ -1,0 +1,20 @@
+<!-- AddPeople.cshtml -->
+<h2>Invite People to Your Project</h2>
+
+@if (ViewBag.GeneratedToken != null)
+{
+    <div class="alert alert-success">
+        <strong>New Join Code:</strong> <h1>@ViewBag.GeneratedToken</h1>
+        <p>Share this code with team members. It can be used only once or until you generate a new one.</p>
+    </div>
+}
+else
+{
+    <p>No code generated yet.</p>
+}
+
+<form asp-action="GenerateToken" method="post">
+    <button type="submit" class="btn btn-primary btn-lg">
+        Generate New 6-Digit Join Code
+    </button>
+</form>
