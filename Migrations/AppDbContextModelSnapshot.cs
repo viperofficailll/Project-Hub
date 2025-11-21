@@ -68,6 +68,46 @@ namespace ProjectHub.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("ProjectHub.Models.TaskItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Assignees")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("DueDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("TaskItems");
+                });
+
             modelBuilder.Entity("ProjectHub.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -89,6 +129,11 @@ namespace ProjectHub.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("UserPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,6 +143,17 @@ namespace ProjectHub.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ProjectHub.Models.TaskItem", b =>
+                {
+                    b.HasOne("ProjectHub.Models.Project", "Project")
+                        .WithMany("TaskItems")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("ProjectHub.Models.User", b =>
@@ -110,6 +166,8 @@ namespace ProjectHub.Migrations
             modelBuilder.Entity("ProjectHub.Models.Project", b =>
                 {
                     b.Navigation("Members");
+
+                    b.Navigation("TaskItems");
                 });
 #pragma warning restore 612, 618
         }

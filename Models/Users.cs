@@ -7,6 +7,10 @@ namespace ProjectHub.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Username is required")]
+        [StringLength(100, ErrorMessage = "Username cannot exceed 100 characters")]
+        public required string UserName { get; set; }
+
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Enter a valid email")]
         public required string UserEmail { get; set; }

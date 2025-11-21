@@ -1,3 +1,4 @@
+wwwroot\css\app-theme.css
 wwwroot\css\createorjoin.css
 wwwroot\css\dashboard.css
 wwwroot\css\login.css
@@ -135,3 +136,4 @@ E:\Dotnet\ProjectHub\wwwroot\lib\jquery\dist\jquery.slim.min.map
 E:\Dotnet\ProjectHub\wwwroot\lib\jquery\LICENSE.txt
 E:\Dotnet\ProjectHub\wwwroot\lib\jquery\dist\jquery.slim.js
 E:\Dotnet\ProjectHub\wwwroot\css\login.css
+E:\Dotnet\ProjectHub\wwwroot\css\app-theme.css

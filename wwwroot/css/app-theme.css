@@ -1,0 +1,201 @@
+/* Global theme palette */
+:root {
+    --primary-900: #312e81;
+    --primary-700: #4338ca;
+    --primary-500: #6366f1;
+    --primary-100: #ede9fe;
+    --success-500: #22c55e;
+    --warning-500: #f97316;
+    --surface: #ffffff;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f4f6fb;
+    font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 45%, #f1f5f9 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: inherit;
+    color: #0f172a;
+}
+
+.app-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.app-card {
+    background: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(79, 70, 229, 0.12);
+    padding: 2.5rem;
+    border: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.app-title {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2vw, 2.25rem);
+    color: var(--primary-900);
+}
+
+.app-subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.app-button-primary {
+    background: linear-gradient(120deg, var(--primary-700), var(--primary-500));
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 0.95rem 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.24);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(79, 70, 229, 0.3);
+}
+
+.app-input {
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-input:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.app-section-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-900);
+    margin-bottom: 1rem;
+}
+
+.app-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--primary-100);
+    color: var(--primary-700);
+    border-radius: 999px;
+    padding: 0.35rem 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.app-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(130deg, var(--primary-700), var(--primary-500));
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.app-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.75rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(99, 102, 241, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+.app-nav .project-meta {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.badge-soft {
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(15, 23, 42, 0.08);
+}
+
+.badge-soft.primary {
+    color: var(--primary-700);
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.badge-soft.success {
+    color: var(--success-500);
+    background: rgba(34, 197, 94, 0.15);
+}
+
+.badge-soft.warning {
+    color: var(--warning-500);
+    background: rgba(249, 115, 22, 0.18);
+}
+
+.app-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 1.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.app-grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+    .app-grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.app-table th {
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+}
+
+.app-table td {
+    vertical-align: middle;
+}
+
+.app-link {
+    color: var(--primary-700);
+    font-weight: 600;
+}
+
+.app-pill {
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.app-pill.owner {
+    background: rgba(252, 211, 77, 0.2);
+    color: #854d0e;
+}
+
+.app-pill.member {
+    background: rgba(96, 165, 250, 0.2);
+    color: #1d4ed8;
+}
+

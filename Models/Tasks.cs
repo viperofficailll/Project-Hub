@@ -1,7 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.ConstrainedExecution;
-using Microsoft.Identity.Client;
+using System.Collections.Generic;
 
 namespace ProjectHub.Models
 {
@@ -17,10 +15,13 @@ namespace ProjectHub.Models
 
         public required string Priority { get; set; }
 
-        public DateOnly DueDate { get; set; }
+        public DateOnly? DueDate { get; set; }
 
-        // Corrected the array declaration
-        public string[]? Assignee { get; set; }
+        public List<string> Assignees { get; set; } = new();
+
+        public int ProjectId { get; set; }
+
+        public Project Project { get; set; } = null!;
     }
 
 }

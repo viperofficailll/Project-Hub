@@ -39,8 +39,11 @@ namespace ProjectHub.Controllers
 
        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(User user)
         {
+            ModelState.Remove(nameof(user.UserName));
+
             if (!ModelState.IsValid)
             {
                 return View(user);
@@ -69,6 +72,7 @@ namespace ProjectHub.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(User user)
         {
             ///1. check the data annotations required ,email,minlength etc
@@ -100,6 +104,14 @@ namespace ProjectHub.Controllers
         public IActionResult Verify()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
         }
 
     }

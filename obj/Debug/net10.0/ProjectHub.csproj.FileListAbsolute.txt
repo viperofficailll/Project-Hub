@@ -281,6 +281,8 @@ E:\Dotnet\ProjectHub\obj\Debug\net10.0\ProjectHub.pdb
 E:\Dotnet\ProjectHub\bin\Debug\net10.0\ProjectHub.deps.json
 E:\Dotnet\ProjectHub\bin\Debug\net10.0\ProjectHub.runtimeconfig.json
 E:\Dotnet\ProjectHub\bin\Debug\net10.0\ProjectHub.pdb
-E:\Dotnet\ProjectHub\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 E:\Dotnet\ProjectHub\obj\Debug\net10.0\ProjectHub.genruntimeconfig.cache
 E:\Dotnet\ProjectHub\obj\Debug\net10.0\ref\ProjectHub.dll
+E:\Dotnet\ProjectHub\obj\Debug\net10.0\ProjectHub.sourcelink.json
+E:\Dotnet\ProjectHub\obj\Debug\net10.0\compressed\jjsweu2caz-{0}-20gklswgxv-20gklswgxv.gz
+E:\Dotnet\ProjectHub\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

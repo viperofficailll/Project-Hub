@@ -122,6 +122,7 @@ namespace ProjectHub.Controllers
 
             ViewBag.IsOwner = (project.Owner == email);
             ViewBag.CurrentUserEmail = email;
+            ViewBag.CurrentUserName = user.UserName;
 
             return View(project);
         }
@@ -253,6 +254,7 @@ namespace ProjectHub.Controllers
 
         public IActionResult AddPeople()
         {
+            var email = HttpContext.Session.GetString("email");
             var projectId = HttpContext.Session.GetInt32("ProjectId");
             if (projectId == null)
                 return RedirectToAction("CreateOrJoin");
@@ -264,6 +266,12 @@ namespace ProjectHub.Controllers
             if (project == null)
                 return RedirectToAction("CreateOrJoin");
 
+            if (project.Owner != email)
+            {
+                TempData["Error"] = "Only project owners can invite new members.";
+                return RedirectToAction("Dashboard");
+            }
+
             ViewBag.GeneratedToken = project.EntryToken;
             return View(project);
         }
@@ -271,6 +279,7 @@ namespace ProjectHub.Controllers
         [HttpPost]
         public IActionResult GenerateToken()
         {
+            var email = HttpContext.Session.GetString("email");
             var projectId = HttpContext.Session.GetInt32("ProjectId");
 
             if (projectId == null)
@@ -281,12 +290,49 @@ namespace ProjectHub.Controllers
             if (project == null)
                 return RedirectToAction("Dashboard");
 
+            if (project.Owner != email)
+            {
+                TempData["Error"] = "Only project owners can generate invite codes.";
+                return RedirectToAction("Dashboard");
+            }
+
             string token = new Random().Next(100000, 999999).ToString();
             project.EntryToken = token;
             context.SaveChanges();
 
             ViewBag.GeneratedToken = token;
             return View("AddPeople", project);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateProfile(int id, string userName)
+        {
+            var email = HttpContext.Session.GetString("email");
+            if (string.IsNullOrEmpty(email))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                TempData["Error"] = "Username cannot be empty.";
+                return RedirectToAction("Profile");
+            }
+
+            var user = context.Users.FirstOrDefault(u => u.Id == id && u.UserEmail == email);
+            if (user == null)
+            {
+                TempData["Error"] = "Unable to load your profile.";
+                return RedirectToAction("Profile");
+            }
+
+            user.UserName = userName.Trim();
+            user.UpdatedAt = DateTime.Now;
+            context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Profile updated successfully.";
+            return RedirectToAction("Profile");
         }
     }
 }
