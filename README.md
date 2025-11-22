@@ -63,7 +63,7 @@ This project demonstrates my proficiency in full-stack .NET development, databas
 
 ### Landing Page
 *Clean, professional landing page introducing the platform*
-![Landing Page](screenshots/aaafirst.png)
+![Landing Page](screenshots/first.png)
 
 ### User Authentication
 
@@ -79,23 +79,33 @@ This project demonstrates my proficiency in full-stack .NET development, databas
 
 #### Create or Join Project
 *Easily create new projects or join existing ones with a code*
-![Create or Join](screenshots/aaacreateorjoin.png)
+![Create or Join](screenshots/createorjoin.png)
+
+#### Project Overview
+*Comprehensive view of project details and status*
+![Project Overview](screenshots/aaproject-overview.png)
 
 #### Switch Projects
 *Seamlessly switch between multiple projects*
 ![Switch Project](screenshots/switchproject.png)
 
-### Dashboard & Analytics
+### Dashboard & Work Items
 
 #### Home Dashboard
 *Main dashboard with work items and project overview*
 ![Home](screenshots/home.png)
 
-#### Analytics Chart
-*Visual representation of project progress and statistics*
-![Chart](screenshots/aachart.png)
+#### Work Items
+*Manage and track all work items in your project*
+![Work Items](screenshots/bworkitems.png)
 
-### Code to Join
+#### Work Items List
+*Detailed list view of all tasks and their status*
+![Work Items List](screenshots/bworkitemslist.png)
+
+### Team Collaboration
+
+#### Code to Join
 *Share project codes for team collaboration*
 ![Code to Join](screenshots/codetojoin.png)
 
@@ -187,11 +197,10 @@ ProjectHub/
 
 ---
 
-
 <p align="center">
   <strong>⭐ If you found this project interesting, please consider giving it a star! ⭐</strong>
 </p>
 
 <p align="center">
   Made with ❤️ and C#
-</p># Project-Hub
+</p>
